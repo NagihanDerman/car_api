@@ -5,6 +5,6 @@ exports.logger = (req, res, next) => {
       req.method + " URL:" + req.url
     );
   
-    // arayazılımdan sonra çalışıcak olan fonksiyon çalışsın:
+    // arayazılımdan sonra çalışıcak olan fonksiyonu calistirir:
     next();
   };

@@ -5,7 +5,7 @@ const write = require("../utils/write")
 
 
 
-// araba verilerini al
+// arac verilerini al
 let cars = JSON.parse(
     fs.readFileSync(`${__dirname}/../data/cars.json`, "utf-8")
   );
@@ -22,16 +22,16 @@ exports.getAllCars = (req, res) => {
 
 //yeni arac ekle
 exports.createCar = (req, res) => {
-    // araç verisine id ekle
+    // arac verisine id ekle
     const newCar = { ...req.body, id: crypto.randomUUID() };
   
-    // yeni aracı diziye ekle
+    // yeni araci diziye ekle
     cars.push(newCar);
   
-    // json dosyasını güncelle
+    // json dosyasını guncelle
     write(cars);
   
-    // client'a cevap gönder
+    // client'a cevap gonder
     res.status(201).json({
       message: "Yeni araç oluşturuldu",
       car: newCar,
@@ -55,36 +55,36 @@ exports.deleteCar = (req, res) => {
 
 // Bir aracı sil:
 exports.deleteCar = (req, res) => {
-    // id'si gelen aracı diziden kaldır
+    // id'si gelen aracı diziden kaldir
     cars = cars.filter((car) => car.id !== req.params.id);
   
-    // json dosyasını güncelle
+    // json dosyasini güncelle
     write(cars);
   
-    // client'a cevap gönder
+    // client'a cevap gonder
     res.status(204).json({
       message: "Araç silindi",
     });
   };
   
-  // Bir aracı güncelle:
+  // Bir aracı guncelle:
   exports.updateCar = (req, res) => {
-    // isteğin body kısmındaki güncellenicek değerleri al
+    // istegin body kisminndaki guncellenecek degerleri al
     const updatedData = req.body;
   
-    // aracın güncel değerlerine sahip yeni bir nesne oluştur
+    // aracın guncel degerlerine sahip yeni bir nesne olustur
     const updatedCar = { ...req.car, ...updatedData };
   
-    // güncellenicek elemanın sırasını bul
+    // guncellenecek elemanin sirasini bul
     const index = cars.findIndex((car) => car.id === updatedCar.id);
   
-    // dizideki eski aracın yerine yeni aracı koy
+    // dizideki eski aracin yerine yeni aracı koy
     cars.splice(index, 1, updatedCar);
   
-    // json dosyasını güncelle
+    // json dosyasını guncelle
     write(cars);
   
-    // client'a cevap gönder
+    // client'a cevap gonder
     res.status(200).json({
       message: "Araç güncellendi",
       car: updatedCar,

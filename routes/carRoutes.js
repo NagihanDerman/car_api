@@ -8,10 +8,10 @@ const {
 } = require("../controllers");
 const idControl = require("../middleware/idControl");
 
-// Router > server.js dosyası dışarıısında route tanımı yapmamızı sağlar s
+// Router > server.js dosyası dısinda route tanimi yapmamizi saglar
 const router = express.Router();
 
-// router'a enpointler ve istek geldiğinde çalışıcak fonksiyonları belirliyoruz
+// router'a enpointler ve istek geldiginde calısıcak fonksiyonları belirtir
 router
   .route("/api/v1/cars")
   .get(getAllCars) //
