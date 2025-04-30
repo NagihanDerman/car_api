@@ -1,25 +1,22 @@
+
 const express = require("express");
-const cors = require("cors");
-const { getAllCars, getCar, deleteCar, updateCar, createCar } = require("./controllers");
+const { logger } = require("./middleware");
+const carRoutes = require("./routes/carRoutes");
 
+// kurulum
 const app = express();
-const port = 3000;
+const PORT = 3000;
 
-//middkeware
-app.use(cors);
+// Middleware (Arayazılım)
+app.use(logger);
 
-//route/endpointlei tanimla
-app.route("/api/v1/cars")
-.get(getAllCars) 
-.post(createCar);
+// istekleerin body/header/param böülmlerini işleyen mw
+app.use(express.json());
 
-app.route("/api/v1/cars/:id")
-.get(getCar)
-.patch(updateCar)
-.delete(deleteCar);
+// route/endpoint 'leri tanımla
+app.use("/", carRoutes);
 
-
-//dinlenecek port
-app.listen(port, () => {
-  console.log(`server ${port}.dan gelen istekleri dinliyor`);
+// dinlenicek portu belirle
+app.listen(PORT, () => {
+  console.log(`Server ${PORT} portunu dinlemeye başladı`);
 });
